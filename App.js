@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StyleSheet,  } from 'react-native';
+import LoginPage from './src/screens/LoginPage';
+import AllCarsScreen from './src/screens/AllCarsScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AddCarScreen from './src/screens/AddCarScreen';
+import EditCarScreen from './src/screens/EditCarScreen';
+import SignUpPage from './src/screens/SignUpPage';
 export default function App() {
+  const Stack = createStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <>
+<NavigationContainer>
+      <Stack.Navigator initialRouteName="SignUp">
+        <Stack.Screen name="SignUp" component={SignUpPage} />
+        <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="AllCars" component={AllCarsScreen} />
+        <Stack.Screen name="AddCar" component={AddCarScreen} />
+        <Stack.Screen name="EditCar" component={EditCarScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>  
+    </>
+    );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
