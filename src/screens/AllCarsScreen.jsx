@@ -1,16 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { View, Text, FlatList, StyleSheet, Button } from "react-native";
 import axios from "axios";
-import { Alert } from "react-native";
 import colors from "../config/colors";
 import CarCard from "../components/CarCard";
-import PageTitle from "../components/PageTitle";
 import ListItemSeparator from "../components/ListItemSeparator";
 import { useNavigation } from "@react-navigation/native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback } from "react";
-import { apiUrl } from "../utilis/ApiUrl";
 
 export default function AllCarsScreen() {
     
@@ -23,7 +20,7 @@ export default function AllCarsScreen() {
         try {
           const token = await AsyncStorage.getItem("token");
           const response = await axios.get(
-            `${apiUrl}/api/car/cars`,
+            `http://localhost:3000/api/car/cars`,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -41,29 +38,11 @@ export default function AllCarsScreen() {
     }, [])
   );
 
-  const deleteCar = (carId) => {
-    Alert.alert(
-      "Confirm Deletion",
-      "Are you sure you want to delete this car?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        {
-          text: "Delete",
-          onPress: () => performDeletion(carId),
-          style: "destructive",
-        },
-      ]
-    );
-  };
 
   const performDeletion = async (carId) => {
     try {
       const token = await AsyncStorage.getItem("token");
-      await axios.delete(`${apiUrl}/api/car/cars/${carId}`, {
+      await axios.delete(`http://localhost:3000/api/car/cars/${carId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -75,7 +54,6 @@ export default function AllCarsScreen() {
   };
   return (
     <>
-      <PageTitle title="My Cars" />
       <View style={styles.container}>
         <Button title="Add Car" onPress={() => navigation.navigate("AddCar")} />
 
@@ -93,7 +71,7 @@ export default function AllCarsScreen() {
                 carowner={item.username}
                 carimage={item.carimage}
                 licensePlate={item.licensePlate || ""}
-                onDelete={() => deleteCar(item.id)}
+                onDelete={() => performDeletion(item.id)}
               />
             )}
             ItemSeparatorComponent={<ListItemSeparator />}
@@ -106,8 +84,6 @@ export default function AllCarsScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
     backgroundColor: colors.primary,
   },
   noCars: {
