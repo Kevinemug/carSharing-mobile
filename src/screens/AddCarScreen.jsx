@@ -5,10 +5,7 @@ import colors from '../config/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import AppButton from '../components/AppButton';
-import PageTitle from '../components/PageTitle';
-import Screen from '../components/Screen';
 import { useNavigation } from '@react-navigation/native'
-import { apiUrl } from '../utilis/ApiUrl';
 
 export default function AddCarScreen ()  {
      
@@ -30,7 +27,7 @@ export default function AddCarScreen ()  {
 
       setIsLoading(true);
       const response = await axios.post(
-        `${apiUrl}/api/car/cars`,
+        `http://localhost:3000/api/car/cars`,
         { carname,
            carprice,
            carimage: "https://s3.eu-central-1.amazonaws.com/assets.monishare.ojemba/cooper.png", 
@@ -53,10 +50,6 @@ export default function AddCarScreen ()  {
   };
   return (
     <>
-    <Screen>
-    <PageTitle title="Create your own car"/>
-
-    </Screen>
     <View style={styles.container}>
       <TextInput
         style={styles.input}
@@ -68,7 +61,7 @@ export default function AddCarScreen ()  {
       <TextInput
         style={styles.input}
         placeholder='Kilometers'
-        secureTextEntry={true}
+        secureTextEntry={false}
         autoCapitalize="none"
         placeholderTextColor='white'
         onChangeText={val => onChangeText('carprice', val)}
