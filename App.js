@@ -12,7 +12,7 @@ export default function App() {
   return (
     <>
 <NavigationContainer>
-      <Stack.Navigator initialRouteName="SignUp">
+      <Stack.Navigator initialRouteName="AllCars">
         <Stack.Screen name="SignUp" component={SignUpPage} />
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="AllCars" component={AllCarsScreen} />

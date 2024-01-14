@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import { View, ActivityIndicator, TextInput, StyleSheet } from 'react-native';
 import colors from '../config/colors';
 import AppButton from '../components/AppButton';
-import PageTitle from '../components/PageTitle';
-import Screen from '../components/Screen';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { apiUrl } from '../utilis/ApiUrl';
 
 export default function LoginPage ()  {
   
@@ -26,7 +23,7 @@ export default function LoginPage ()  {
     const { username, password, email, phone_number } = state;
     try {
       setIsLoading(true);
-      const response = await axios.post(`${apiUrl}/api/auth/login`, {
+      const response = await axios.post(`http://localhost:3000/api/auth/login`, {
         username,
         password,
         // email,
@@ -47,10 +44,6 @@ export default function LoginPage ()  {
 
   return (
     <>
-    <Screen>
-    <PageTitle title="Log in"/>
-
-    </Screen>
     <View style={styles.container}>
       <TextInput
         style={styles.input}

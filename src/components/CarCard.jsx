@@ -61,24 +61,21 @@ const styles = StyleSheet.create({
       shadowOpacity: 0.1,
       shadowRadius: 2,
       elevation: 3,
-      marginVertical: 8,
+      flex:1,
+      // marginVertical: 8,
       padding:10
 
   
 
    },
  card:{
-    flexDirection: 'row',
-    padding: 10,
+    flexDirection: 'column',
+   //  padding: 10,
     alignItems: 'center',
  },
 
- detailsContainer:{
-    padding:20,
-    flex:1,
- },
  image:{
-    width:'60%',
+    width:'100%',
     height:200,
  } ,
  subTitle:{
