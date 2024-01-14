@@ -3,10 +3,7 @@ import axios from 'axios';
 import { View, ActivityIndicator, Text,TextInput, StyleSheet } from 'react-native';
 import colors from '../config/colors';
 import AppButton from '../components/AppButton';
-import PageTitle from '../components/PageTitle';
-import Screen from '../components/Screen';
 import { useNavigation } from '@react-navigation/native'
-import { apiUrl } from '../utilis/ApiUrl';
 export default function SignUpPage ()  {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false); 
@@ -23,7 +20,7 @@ export default function SignUpPage ()  {
     const { username, password, email, phone_number } = state;
     try {
       setIsLoading(true);
-      const response = await axios.post(`${apiUrl}/api/auth/signup`, {
+      const response = await axios.post(`http://localhost:3000/api/auth/signup`, {
         username,
         password,
         // email,
@@ -41,10 +38,6 @@ export default function SignUpPage ()  {
   };
   return (
     <>
-    <Screen>
-    <PageTitle title="SignUP to get started"/>
-
-    </Screen>
     <View style={styles.container}>
       <TextInput
         style={styles.input}
