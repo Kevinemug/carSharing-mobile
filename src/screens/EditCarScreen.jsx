@@ -10,10 +10,7 @@ import {
   Image,
 } from "react-native";
 import AppButton from "../components/AppButton";
-import PageTitle from "../components/PageTitle";
-import Screen from "../components/Screen";
 import { useNavigation } from "@react-navigation/native";
-import { apiUrl } from "../utilis/ApiUrl";
 
 export default function EditCarScreen({ route }) {
 
@@ -27,7 +24,7 @@ export default function EditCarScreen({ route }) {
       try {
         const token = await AsyncStorage.getItem("token");
         const response = await axios.get(
-          `${apiUrl}/api/car/cars/${carId}`,
+          `http://localhost:3000/api/car/cars/${carId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -51,7 +48,7 @@ export default function EditCarScreen({ route }) {
       setIsLoading(true);
       const token = await AsyncStorage.getItem("token");
       await axios.patch(
-        `${apiUrl}/api/car/cars/${carId}`,
+        `http://localhost:3000/api/car/cars/${carId}`,
         carData,
         {
           headers: {
@@ -69,9 +66,6 @@ export default function EditCarScreen({ route }) {
   };
   return (
     <>
-      <Screen>
-        <PageTitle title="Edit Car" />
-      </Screen>
       <View style={styles.container}>
         <TextInput
           style={styles.input}
